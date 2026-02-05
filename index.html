@@ -1,810 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ConectCamp - All-in-One Business Tools</title>
-  
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome 6 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg: #212121; /* Dark background */
-      --sidebar: #1A1D23; /* Sidebar / card background */
-      --card: #1A1D23; /* Card background */
-      
-      --accent: #667eea; /* Updated from primary color */
-      --accent-secondary: #764ba2; /* Optional secondary accent */
-      
-      --text: #ffffff; /* Default light text */
-      --light-text: #000000; /* For light mode or light elements */
-      --light-bg: #f8f9fa; /* Light background */
-      
-      --success: #2ecc71;
-      --danger: #e74c3c;
-      --warning: #f39c12;
-      --info: #3498db;
-      
-      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Adunni | From Abiola</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Parisienne&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --deep-burgundy: #590d22;
+            --soft-pink: #fff0f3;
+            --gold: #ffb703;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        body {
+            background: radial-gradient(circle at center, #ff4d6d 0%, #800f2f 100%);
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', 'Segoe UI', sans-serif;
-      line-height: 1.6;
-    }
+        /* Floating Hearts Background */
+        #bg-hearts {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.15);
+            animation: floatUp 8s linear infinite;
+        }
 
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
 
-    ::-webkit-scrollbar-thumb {
-      background: var(--gradient);
-      border-radius: 4px;
-    }
+        /* Main Glass Card */
+        .main-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
 
-    /* Header Styles */
-    .custom-header {
-      background: var(--sidebar);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(102, 126, 234, 0.1);
-      transition: var(--transition);
-    }
+        h1 {
+            font-family: 'Parisienne', cursive;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
 
-    .navbar-brand {
-      font-size: 1.75rem;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        /* Envelope Styles */
+        .envelope-container {
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .envelope-container:hover { transform: scale(1.1); }
+        .envelope-icon { font-size: 5rem; animation: pulse-heart 2s infinite; }
+        
+        @keyframes pulse-heart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
 
-    .navbar-nav .nav-link {
-      color: var(--text) !important;
-      font-weight: 500;
-      padding: 0.75rem 1rem !important;
-      transition: var(--transition);
-      position: relative;
-    }
+        /* Hidden Letter */
+        #hidden-letter { display: none; }
 
-    .navbar-nav .nav-link:hover {
-      color: var(--accent) !important;
-      transform: translateY(-2px);
-    }
+        .love-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
 
-    .navbar-nav .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--gradient);
-      transition: var(--transition);
-      transform: translateX(-50%);
-    }
+        /* Glowing Button */
+        .btn-glow {
+            background: linear-gradient(45deg, var(--primary-red), var(--deep-burgundy));
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255, 77, 109, 0.9); color: white; }
 
-    .navbar-nav .nav-link:hover::after {
-      width: 80%;
-    }
+        /* MODAL STYLES */
+        .modal-content {
+            background: linear-gradient(135deg, #2b0a14 0%, #590d22 100%);
+            border: 1px solid rgba(255,215,0, 0.3);
+            border-radius: 25px;
+            color: white;
+            text-align: center;
+        }
+        .modal-header { border: none; justify-content: flex-end; }
+        
+        /* Countdown Styles */
+        .countdown-number {
+            font-size: 6rem;
+            font-weight: bold;
+            color: var(--gold);
+            font-family: 'Parisienne', cursive;
+            text-shadow: 0 0 20px rgba(255, 183, 3, 0.6);
+        }
 
-    .navbar-toggler {
-      border: none;
-      padding: 0.25rem 0.5rem;
-    }
+        /* Screenshot Card */
+        .screenshot-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px dashed rgba(255,255,255,0.4);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
 
-    .navbar-toggler:focus {
-      box-shadow: none;
-    }
-
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-
-    /* Hero Section */
-    .hero-section {
-      background: linear-gradient(135deg, var(--bg) 0%, var(--sidebar) 100%);
-      padding: 5rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--gradient);
-      opacity: 0.05;
-      z-index: 1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .gradient-btn {
-      background: var(--gradient);
-      border: none;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition);
-      box-shadow: var(--card-shadow);
-      display: inline-block;
-    }
-
-    .gradient-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 25px 80px rgba(102, 126, 234, 0.3);
-      color: white;
-      text-decoration: none;
-    }
-
-    /* Tools Section */
-    .tools-section {
-      padding: 5rem 0;
-      background: var(--bg);
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 3rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .tool-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      transition: var(--transition);
-      border: 1px solid rgba(102, 126, 234, 0.1);
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tool-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transition: var(--transition);
-    }
-
-    .tool-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--card-shadow);
-      border-color: var(--accent);
-    }
-
-    .tool-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .tool-icon {
-      font-size: 3rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .tool-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: var(--text);
-    }
-
-    .tool-description {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    /* Map Section */
-    .map-section {
-      padding: 3rem 0;
-      background: var(--sidebar);
-    }
-
-    .map-container {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--card-shadow);
-    }
-
-    .map-container iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      filter: grayscale(0.3) contrast(1.2);
-    }
-
-    /* Footer */
-    .custom-footer {
-      background: var(--sidebar);
-      padding: 3rem 0 2rem;
-      border-top: 1px solid rgba(102, 126, 234, 0.1);
-    }
-
-    .footer-content {
-      text-align: center;
-    }
-
-    .social-icons {
-      margin-top: 1.5rem;
-    }
-
-    .social-link {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      border-radius: 50%;
-      background: rgba(102, 126, 234, 0.1);
-      color: var(--accent);
-      font-size: 1.25rem;
-      margin: 0 0.5rem;
-      transition: var(--transition);
-      text-decoration: none;
-    }
-
-    .social-link:hover {
-      background: var(--gradient);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-
-      .hero-subtitle {
-        font-size: 1.1rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .tool-card {
-        margin-bottom: 1.5rem;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .hero-title {
-        font-size: 2rem;
-      }
-
-      .gradient-btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.95rem;
-      }
-    }
-
-    /* Animation Classes */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: var(--transition);
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Loading Animation */
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.7; }
-      100% { opacity: 1; }
-    }
-
-    .loading {
-      animation: pulse 2s infinite;
-    }
-  </style>
+        .btn-yes { background-color: #2dc653; color: white; padding: 10px 30px; border-radius: 30px; border: none; font-weight: bold; margin: 10px; }
+        .btn-no { background-color: #d00000; color: white; padding: 10px 30px; border-radius: 30px; border: none; font-weight: bold; margin: 10px; }
+        
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <nav class="navbar navbar-expand-lg custom-header sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#home">ConectCamp</a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#tools">Tools</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#mission">Mission</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#vision">Vision</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#faq">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="register.html">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="register.html">Login</a>
-          </li>
-        </ul>
-      </div>
+
+    <div id="bg-hearts"></div>
+
+    <div class="main-card animate__animated animate__fadeInDown">
+        <p class="text-uppercase small mb-2" style="letter-spacing: 3px; color: var(--soft-pink);">To My Queen</p>
+        <h1>Adunni</h1>
+        
+        <div class="envelope-container" id="opener" onclick="revealLetter()">
+            <div class="envelope-icon">💌</div>
+            <p class="small mt-2" style="opacity: 0.8;">Tap to open my heart</p>
+        </div>
+
+        <div id="hidden-letter" class="animate__animated animate__fadeInUp">
+            <p class="love-text">
+                "Adunni, you are the magic in my mundane days. I created this little corner of the internet just for you, to show you a fraction of how much I care."
+            </p>
+            <button class="btn btn-glow mt-3" onclick="startJourney()">
+                Click for the Magic ✨
+            </button>
+        </div>
     </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="hero-content text-center">
-            <h1 class="hero-title fade-in">Empowering Every Business with Smart Tools</h1>
-            <p class="hero-subtitle fade-in">No matter your industry, size, or goal — ConectCamp provides powerful tools for all. From automation to growth, we help businesses and individuals thrive.</p>
-            <a href="register.html" class="gradient-btn fade-in">
-              <i class="fas fa-rocket me-2"></i>Get Started
-            </a>
-          </div>
+    <div class="modal fade" id="magicModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close btn-close-white" id="closeBtn" data-bs-dismiss="modal" style="display:none;"></button>
+                </div>
+                <div class="modal-body pb-5" id="modalBody">
+                    </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Tools Section -->
-  <section id="tools" class="tools-section">
-    <div class="container">
-      <h2 class="section-title fade-in">Our Smart Business Tools</h2>
-      <div class="row g-4">
-        <!-- Tool Cards -->
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-graduation-cap tool-icon"></i>
-            <h4 class="tool-title">CGPA Calculator</h4>
-            <p class="tool-description">Calculate your academic performance easily with precision and accuracy.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-id-badge tool-icon"></i>
-            <h4 class="tool-title">Profile Calculator</h4>
-            <p class="tool-description">Evaluate your personal or business profile comprehensively.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-hand-holding-usd tool-icon"></i>
-            <h4 class="tool-title">Loan Calculator</h4>
-            <p class="tool-description">Plan and compare loan payments effectively with detailed analysis.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-list-check tool-icon"></i>
-            <h4 class="tool-title">To-Do List App</h4>
-            <p class="tool-description">Organize your daily tasks with ease and boost productivity.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-money-bill-wave tool-icon"></i>
-            <h4 class="tool-title">Tax Calculator</h4>
-            <p class="tool-description">Estimate taxes based on your income with accurate calculations.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-percent tool-icon"></i>
-            <h4 class="tool-title">VAT Calculator</h4>
-            <p class="tool-description">Calculate Value Added Tax quickly and efficiently.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-tags tool-icon"></i>
-            <h4 class="tool-title">Discount Calculator</h4>
-            <p class="tool-description">Find final prices after discount instantly and accurately.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-calendar-alt tool-icon"></i>
-            <h4 class="tool-title">Tax Planner App</h4>
-            <p class="tool-description">Strategically plan your taxes annually with smart insights.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-chart-line tool-icon"></i>
-            <h4 class="tool-title">Interest Calculator</h4>
-            <p class="tool-description">Compute simple and compound interests with precision.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-clock tool-icon"></i>
-            <h4 class="tool-title">Overtime Calculator</h4>
-            <p class="tool-description">Track extra work hours accurately and calculate overtime pay.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-coins tool-icon"></i>
-            <h4 class="tool-title">Daily Income Calculator</h4>
-            <p class="tool-description">Evaluate your earnings per day with detailed breakdowns.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-ruler-combined tool-icon"></i>
-            <h4 class="tool-title">Measurement Converter</h4>
-            <p class="tool-description">Convert units across all categories with high accuracy.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-book tool-icon"></i>
-            <h4 class="tool-title">Book Keeping App</h4>
-            <p class="tool-description">Track expenses, incomes, and balances systematically.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-file-invoice tool-icon"></i>
-            <h4 class="tool-title">Invoice Generator</h4>
-            <p class="tool-description">Create professional invoices in seconds with customization.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-receipt tool-icon"></i>
-            <h4 class="tool-title">Receipt Generator</h4>
-            <p class="tool-description">Generate printable receipts instantly with professional formatting.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-cash-register tool-icon"></i>
-            <h4 class="tool-title">Cashbook App</h4>
-            <p class="tool-description">Maintain a detailed cash record log with transaction history.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-balance-scale tool-icon"></i>
-            <h4 class="tool-title">Comparative Statement App</h4>
-            <p class="tool-description">Compare income and expenses clearly with visual reports.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-star-half-alt tool-icon"></i>
-            <h4 class="tool-title">Reviews Generator</h4>
-            <p class="tool-description">Collect and display star-based reviews with analytics.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-boxes tool-icon"></i>
-            <h4 class="tool-title">Inventory App</h4>
-            <p class="tool-description">Track stock, quantity, and levels with real-time updates.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-users-cog tool-icon"></i>
-            <h4 class="tool-title">Payroll App</h4>
-            <p class="tool-description">Manage employee salary and deductions efficiently.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-chart-bar tool-icon"></i>
-            <h4 class="tool-title">Revenue Forecasting App</h4>
-            <p class="tool-description">Predict future revenue with accuracy using data analytics.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-clipboard-list tool-icon"></i>
-            <h4 class="tool-title">Sales Recorder</h4>
-            <p class="tool-description">Keep daily sales records organized with detailed tracking.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-hard-hat tool-icon"></i>
-            <h4 class="tool-title">Material Cost Calculator</h4>
-            <p class="tool-description">Estimate cost of materials easily with comprehensive analysis.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-chart-pie tool-icon"></i>
-            <h4 class="tool-title">Profit & Loss Calculator</h4>
-            <p class="tool-description">Track gains and losses precisely with detailed reporting.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-quote-right tool-icon"></i>
-            <h4 class="tool-title">Quotation Generator</h4>
-            <p class="tool-description">Create professional quotations easily with customizable templates.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-building tool-icon"></i>
-            <h4 class="tool-title">Company Management App</h4>
-            <p class="tool-description">Oversee business activities and data comprehensively.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-school tool-icon"></i>
-            <h4 class="tool-title">School Management App</h4>
-            <p class="tool-description">Manage students, teachers, and classes efficiently.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-church tool-icon"></i>
-            <h4 class="tool-title">Church Management App</h4>
-            <p class="tool-description">Track contributions and members with detailed records.</p>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="tool-card fade-in">
-            <i class="fas fa-file-alt tool-icon"></i>
-            <h4 class="tool-title">Report Card Generator</h4>
-            <p class="tool-description">Create accurate student report cards with professional formatting.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Map Section -->
-  <section class="map-section">
-    <div class="container">
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps?q=1%20bola%20hassan%20alapere%20ketu%20lagos&output=embed" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="custom-footer">
-    <div class="container">
-      <div class="footer-content">
-        <p class="mb-0">&copy; 2025 ConectCamp. All rights reserved.</p>
-        <div class="social-icons">
-          <a href="https://tiktok.com" target="_blank" class="social-link" aria-label="TikTok">
-            <i class="fab fa-tiktok"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://wa.me/234" target="_blank" class="social-link" aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Bootstrap 5 JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Custom JavaScript -->
-  <script>
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    <script>
+        // --- 1. Background Animation ---
+        const bgContainer = document.getElementById('bg-hearts');
+        function spawnHeart() {
+            const el = document.createElement('div');
+            el.classList.add('bg-heart');
+            el.innerText = Math.random() > 0.5 ? '❤' : '✨';
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            bgContainer.appendChild(el);
+            setTimeout(() => el.remove(), 10000);
         }
-      });
-    }, observerOptions);
+        setInterval(spawnHeart, 300);
 
-    // Observe all elements with fade-in class
-    document.addEventListener('DOMContentLoaded', () => {
-      const fadeElements = document.querySelectorAll('.fade-in');
-      fadeElements.forEach(el => observer.observe(el));
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        // --- 2. Reveal Letter ---
+        function revealLetter() {
+            document.getElementById('opener').style.display = 'none';
+            document.getElementById('hidden-letter').style.display = 'block';
         }
-      });
-    });
 
-    // Navbar background opacity on scroll
-    window.addEventListener('scroll', () => {
-      const navbar = document.querySelector('.custom-header');
-      if (window.scrollY > 50) {
-        navbar.style.backgroundColor = 'rgba(26, 29, 35, 0.95)';
-      } else {
-        navbar.style.backgroundColor = 'var(--sidebar)';
-      }
-    });
+        // --- 3. The Journey (Countdown -> Question -> Result) ---
+        let modalBody = document.getElementById('modalBody');
+        let magicModal;
 
-    // Add loading animation to cards on hover
-    document.querySelectorAll('.tool-card').forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        this.classList.add('loading');
-      });
-      
-      card.addEventListener('mouseleave', function() {
-        this.classList.remove('loading');
-      });
-    });
+        function startJourney() {
+            magicModal = new bootstrap.Modal(document.getElementById('magicModal'));
+            magicModal.show();
+            
+            // Phase 1: Countdown
+            let count = 10;
+            modalBody.innerHTML = `
+                <div class="animate__animated animate__fadeIn">
+                    <h3 class="mb-4">Wait for another surprise from Abiola...</h3>
+                    <div class="countdown-number animate__animated animate__pulse animate__infinite" id="timer">10</div>
+                    <p class="small mt-3 text-muted">Hold on tight...</p>
+                </div>
+            `;
 
-    // Performance optimization: Lazy load images
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            imageObserver.unobserve(img);
-          }
-        });
-      });
+            let timer = setInterval(() => {
+                count--;
+                if(count > 0) {
+                    document.getElementById('timer').innerText = count;
+                } else {
+                    clearInterval(timer);
+                    showQuestion();
+                }
+            }, 1000);
+        }
 
-      document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-      });
-    }
+        function showQuestion() {
+            // Phase 2: The Question
+            document.getElementById('closeBtn').style.display = 'block'; // Allow closing now
+            modalBody.innerHTML = `
+                <div class="animate__animated animate__zoomIn">
+                    <h2 style="font-family: 'Parisienne', cursive; font-size: 3.5rem; color: var(--gold);">
+                        Would you be my Val?
+                    </h2>
+                    <p class="lead mb-4">Adunni, make me the happiest man alive.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button class="btn btn-yes btn-lg" onclick="handleResponse('yes')">YES! 🥰</button>
+                        <button class="btn btn-no btn-lg" onclick="handleResponse('no')">NO 😢</button>
+                    </div>
+                </div>
+            `;
+        }
 
-    // Add click analytics for tool cards (placeholder for future implementation)
-    document.querySelectorAll('.tool-card').forEach(card => {
-      card.addEventListener('click', function() {
-        const toolName = this.querySelector('.tool-title').textContent;
-        console.log(`Tool clicked: ${toolName}`);
-        // Here you could add analytics tracking
-      });
-    });
+        function handleResponse(answer) {
+            if (answer === 'yes') {
+                // Celebration Confetti
+                fireConfetti();
+                modalBody.innerHTML = `
+                    <div class="animate__animated animate__tada">
+                        <h1 class="text-success mb-3">Thanks My Love! ❤️</h1>
+                        <p class="fs-5">I knew you were the one!</p>
+                        <div class="screenshot-card">
+                            <p class="mb-1 fw-bold text-warning">📸 INSTRUCTION:</p>
+                            <p class="mb-0">Please screenshot this screen and send it to Abiola immediately!</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                modalBody.innerHTML = `
+                    <div class="animate__animated animate__shakeX">
+                        <h1 class="text-danger mb-3">Why My Love? 💔</h1>
+                        <p class="fs-5">My heart is broken...</p>
+                        <div class="screenshot-card" style="border-color: #ff6b6b;">
+                            <p class="mb-1 fw-bold text-warning">📸 INSTRUCTION:</p>
+                            <p class="mb-0">Please screenshot this screen and send it to Abiola to explain why!</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
 
-    // Enhanced mobile navigation
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    
-    if (navbarToggler && navbarCollapse) {
-      navbarToggler.addEventListener('click', () => {
-        navbarToggler.classList.toggle('active');
-      });
-      
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          if (navbarCollapse.classList.contains('show')) {
-            navbarToggler.click();
-          }
-        });
-      });
-    }
-  </script>
+        function fireConfetti() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ffb703', '#ff4d6d', '#ffffff']
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ffb703', '#ff4d6d', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
 </body>
 </html>
